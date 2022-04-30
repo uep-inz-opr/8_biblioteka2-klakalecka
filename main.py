@@ -68,21 +68,21 @@ for ksiazkaInput in liczba_krotek:
     usun_cudzyslow = usun_nawias2.replace("\"", "")
     splitter = usun_cudzyslow.split(", ")
     if splitter[0].strip() == "dodaj":
-        ksiazka = Ksiazka(tytul=splitter[1], autor=splitter[2], rok=splitter[3])
+        ksiazka = Ksiazka(tytul=splitter[1].strip(), autor=splitter[2].strip(), rok=splitter[3].strip())
         print(biblioteka.dodaj_egzemplarz_ksiazki(ksiazka))
     if splitter[0].strip() == "wypozycz":
         jest_juz_czytelnik = False
-        tytul = splitter[2]
+        tytul = splitter[2].strip()
         for czytelnik in biblioteka.lista_czytelnikow:
-            if czytelnik.nazwisko == splitter[1]:
+            if czytelnik.nazwisko == splitter[1].strip():
                 jest_juz_czytelnik = True
                 print(biblioteka.wypozycz(czytelnik, tytul))
                 break
         if not jest_juz_czytelnik:
-            nowy_czytelnik = Czytelnik(splitter[1], [])
+            nowy_czytelnik = Czytelnik(splitter[1].strip(), [])
             biblioteka.lista_czytelnikow.append(nowy_czytelnik)
             print(biblioteka.wypozycz(nowy_czytelnik, tytul))
     if splitter[0].strip() == "oddaj":
-        nazwisko = splitter[1]
-        tytul = splitter[2]
+        nazwisko = splitter[1].strip()
+        tytul = splitter[2].strip()
         print(biblioteka.oddaj(nazwisko, tytul))
